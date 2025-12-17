@@ -88,8 +88,7 @@ The view should include:
 
 In addition:
 
-- Transfers should be prevented if the amount exceeds the available balance
-- The submitted request must match the API’s expected payload shape
+- Use frontend validation before sending transfer requests - transfers should be prevented for accounts that are not active, or if the amount exceeds the available balance
 - A successful response should display a confirmation message, reset the form, and update the account balances
 - A failed response should display a clear, user-visible error message
 
