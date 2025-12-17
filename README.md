@@ -47,7 +47,7 @@ Additional constraints:
 ---
 
 **Time Expectation**  
-You may take up to two days to complete this exercise. You are not expected to use the full time, and partial solutions are acceptable if they are well structured and clearly documented.
+You may take up to two days to complete this exercise. You are not expected to use the full time, and partial solutions are acceptable.
 
 ---
 
@@ -124,7 +124,7 @@ When reviewing submissions, we focus on the following areas:
 Please submit:
 
 - A PR containing your work, submitted no more than 2 days after materials provided
-- Updates to the README explaining how to run the project, noting any assumptions or trade-offs, and describing what you would improve with more time
+- Updates to the README noting any assumptions or trade-offs, and describing what you would improve with more time
 
 ---
 
