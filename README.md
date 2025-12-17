@@ -114,10 +114,10 @@ Mock data should only be used for UI elements that cannot be reasonably derived 
 **What We’re Evaluating**  
 When reviewing submissions, we focus on the following areas:
 
-- **State management:** clear and predictable state flow with appropriate use of local state and stores
+- **TypeScript:** strong typing throughout the application with minimal use of `any`
 - **Component structure:** clean separation of concerns and sensible parent/child relationships
 - **Markup & styling:** semantic, accessible HTML; clean, maintainable CSS; and consistent use of provided variables
-- **TypeScript:** strong typing throughout the application with minimal use of `any`
+- **State management:** clear and predictable state flow with appropriate use of local state and stores
 - **Error handling:** thoughtful handling of API failures, validation errors, and user feedback
 
 ---
