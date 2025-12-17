@@ -72,7 +72,6 @@ At a minimum, the view should:
 
 - Display the account name, account number, balance, and active or inactive status
 - Visually distinguish inactive accounts
-- Include a toggle to hide inactive accounts
 - Handle loading and error states gracefully
 
 Optional enhancements such as masking account numbers or displaying an empty state are welcome but not required.
