@@ -28,12 +28,12 @@ You can preview the production build with `npm run preview`.
 ## Interview Instructions
 
 **SvelteKit Frontend Exercise (Paid)**  
-This paid exercise is designed to evaluate how you design, structure, and implement a small SvelteKit application under realistic constraints. You will be working in a SvelteKit codebase we provide, using Svelte & TypeScript throughout.
+This paid exercise is designed to evaluate how you design, structure, and implement a small SvelteKit application under realistic constraints. You will be working in a SvelteKit codebase we've provided, using Svelte & TypeScript throughout.
 
 ---
 
 **Technology & Constraints**  
-The application should be built using SvelteKit and TypeScript and styled with plain CSS (or SCSS if already configured). A shared CSS variables stylesheet will be provided and should be used consistently for spacing, colors, and typography. Please do not use Tailwind, component libraries, or other styling frameworks.
+The application should be built using SvelteKit and TypeScript and styled with plain CSS (or SCSS if already configured). A shared CSS variables stylesheet has been provided and should be used consistently for spacing, colors, and typography. Please do not use Tailwind, component libraries, or other styling frameworks.
 
 Svelte 4 should be used for this project. Svelte legacy documentation is available here:  
 https://svelte.dev/docs/svelte/legacy-overview
