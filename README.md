@@ -131,5 +131,5 @@ Please submit:
 **Important Links**
 
 - **API documentation:** https://northwind.dev.array.io/swagger/index.html#/
-- **Figma / UI:** ??
+- **Figma:** https://www.figma.com/design/MHYrsFt7CEgzyGu3PhyuKV/fe-takehome-exercise?node-id=0-1&p=f&m=dev
 - **Svelte Documentation:** https://svelte.dev/docs/svelte/legacy-overview
