@@ -59,14 +59,14 @@ Accessibility should be intentionally considered in your markup and styling, inc
 ---
 
 **Application Structure**  
-The application consists of two primary views: an Accounts Overview view and a Balance Transfer view. These views represent different states of the same application and do not need to be implemented as separate routes. Conditional rendering—such as switching views based on a local page value—is perfectly acceptable, and the overall structure and navigation approach are left to your discretion.
+The application consists of two primary views: an Accounts view and a Balance Transfer view. These views represent different states of the same application and do not need to be implemented as separate routes. Conditional rendering—such as switching views based on a local page value—is perfectly acceptable, and the overall structure and navigation approach are left to your discretion.
 
 You may also choose to implement these views as separate routes if you feel that better matches your design approach; we will not penalize either choice.
 
 ---
 
-**Accounts Overview View**  
-The Accounts Overview view should fetch a list of bank accounts from the API and present relevant information in a clear and readable format.
+**Accounts View**  
+The Accounts view should fetch a list of bank accounts from the API and present relevant information in a clear and readable format.
 
 At a minimum, the view should:
 
