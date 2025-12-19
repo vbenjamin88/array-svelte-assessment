@@ -128,8 +128,10 @@ Please submit:
 
 ---
 
-**Important Links**
+**Important Links**  
+  
+  Figma password and API key will be provided by the Array talent team.
 
 - **API documentation:** https://northwind.dev.array.io/swagger/index.html#/
-- **Figma:** https://www.figma.com/design/MHYrsFt7CEgzyGu3PhyuKV/fe-takehome-exercise?node-id=0-1&p=f&m=dev
+- **Figma:** https://www.figma.com/design/MHYrsFt7CEgzyGu3PhyuKV/Array-front-end-interview?node-id=0-1&p=f&m=dev
 - **Svelte Documentation:** https://svelte.dev/docs/svelte/legacy-overview
