@@ -30,8 +30,13 @@ You can preview the production build with `npm run preview`.
 **SvelteKit Frontend Exercise (Paid)**  
 This paid exercise is designed to evaluate how you design, structure, and implement a small SvelteKit application under realistic constraints. You will be working in a SvelteKit codebase we've provided, using Svelte & TypeScript throughout.
 
----
+---  
 
+**Time Expectation**  
+You may take up to two days to complete this exercise. You are not expected to use the full time, and partial solutions are acceptable.
+
+---  
+  
 **Technology & Constraints**  
 The application should be built using SvelteKit and TypeScript and styled with plain CSS (or SCSS if already configured). A shared CSS variables stylesheet has been provided and should be used consistently for spacing, colors, and typography. Please do not use Tailwind, component libraries, or other styling frameworks.
 
@@ -43,11 +48,6 @@ Additional constraints:
 - State management is up to you and may include component state, Svelte stores, or derived state
 - API requests should use only the provided endpoints
 - Prioritize clarity, correctness, and maintainability over abstraction or premature optimization
-
----
-
-**Time Expectation**  
-You may take up to two days to complete this exercise. You are not expected to use the full time, and partial solutions are acceptable.
 
 ---
 
