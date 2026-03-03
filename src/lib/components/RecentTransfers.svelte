@@ -13,6 +13,7 @@
 	export let items: TransferItem[] = [];
 </script>
 
+<!-- Recent internal transfers list -->
 <section class="recent-transfers" aria-labelledby="transfers-heading">
 	<h2 id="transfers-heading" class="heading">Recent transfers</h2>
 	<p class="subheading">Quick reference of your latest internal transfers.</p>

@@ -15,6 +15,7 @@ function mockAccount(overrides: Partial<AccountSummary> = {}): AccountSummary {
 	};
 }
 
+// Display label formatting
 describe('accountLabel', () => {
 	it('returns label with suffix for Checking', () => {
 		const account = mockAccount({ account_type: 'Checking', account_number: '1234568821' });
