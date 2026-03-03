@@ -411,7 +411,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--s-2); /* 8px between title and subtitle */
-		margin-bottom: var(--s-6);
 	}
 
 	.page-title {
