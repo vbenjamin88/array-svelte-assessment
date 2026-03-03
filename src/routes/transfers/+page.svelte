@@ -401,4 +401,13 @@
 		padding: var(--s-2);
 		margin: 0 0 var(--s-3);
 	}
+
+	/* Ensure an 8px gap between title and subtitle */
+	.page-title {
+		margin: 0;
+	}
+
+	.page-subtitle {
+		margin: var(--s-2) 0 var(--s-6);
+	}
 </style>
