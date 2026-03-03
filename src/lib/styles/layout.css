@@ -53,6 +53,7 @@
 .left-col {
 	display: flex;
 	flex-direction: column;
+	gap: var(--s-12); /* 48px default vertical spacing */
 }
 
 .right-col {

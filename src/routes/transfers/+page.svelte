@@ -413,6 +413,11 @@
 		gap: var(--s-2); /* 8px between title and subtitle */
 	}
 
+	/* On transfers page, reduce left column vertical gap to 24px instead of 48px */
+	:global(.left-col) {
+		gap: var(--s-6);
+	}
+
 	.page-title {
 		margin: 0;
 	}
