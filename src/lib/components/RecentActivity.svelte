@@ -5,6 +5,7 @@
 	export let items: ActivityItem[] = [];
 </script>
 
+<!-- Recent account activity list -->
 <section class="recent-activity" aria-labelledby="activity-heading">
 	<h2 id="activity-heading" class="heading">Recent Activity</h2>
 	<p class="subheading">Latest movements across all accounts</p>

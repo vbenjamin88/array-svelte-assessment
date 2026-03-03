@@ -26,7 +26,7 @@ function accountDisplayName(type: string): string {
 	}
 }
 
-/** Mask account number to last 4 digits */
+/** Mask account number for label suffix based on Northwind format */
 export function maskAccountNumber(num: string): string {
 	// If there is a dash, show everything after the last dash (with non-digits stripped),
 	// e.g. "****-00021" -> "00021".
