@@ -9,4 +9,5 @@
 
 body {
 	font-family: var(--text-font), system-ui, sans-serif;
+	line-height: 1.5;
 }
