@@ -221,8 +221,12 @@
 				<p class="api-warning" role="status">API is unavailable. Showing static demo data.</p>
 			{/if}
 
-			<h2 id="transfer-heading" class="page-title">Transfer between accounts</h2>
-			<p id="transfer-desc" class="page-subtitle">Move money instantly between your accounts.</p>
+			<div class="page-header">
+				<h2 id="transfer-heading" class="page-title">Transfer between accounts</h2>
+				<p id="transfer-desc" class="page-subtitle">
+					Move money instantly between your accounts.
+				</p>
+			</div>
 			<div class="form-card">
 				<TransferForm
 					{accounts}
@@ -402,12 +406,19 @@
 		margin: 0 0 var(--s-3);
 	}
 
-	/* Ensure an 8px gap between title and subtitle */
+	/* Local header stack for transfers page */
+	.page-header {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-2); /* 8px between title and subtitle */
+		margin-bottom: var(--s-6);
+	}
+
 	.page-title {
 		margin: 0;
 	}
 
 	.page-subtitle {
-		margin: var(--s-2) 0 var(--s-6);
+		margin: 0;
 	}
 </style>
