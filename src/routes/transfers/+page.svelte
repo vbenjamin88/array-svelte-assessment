@@ -215,45 +215,47 @@
 		</div>
 	</div>
 {:else}
-	<PageShell ariaLabel="Balance transfer" rightAriaLabel="Transfer summary and recent transfers">
-		<svelte:fragment slot="left">
-			{#if apiAvailable === false}
-				<p class="api-warning" role="status">API is unavailable. Showing static demo data.</p>
-			{/if}
+	<div class="transfers-page">
+		<PageShell ariaLabel="Balance transfer" rightAriaLabel="Transfer summary and recent transfers">
+			<svelte:fragment slot="left">
+				{#if apiAvailable === false}
+					<p class="api-warning" role="status">API is unavailable. Showing static demo data.</p>
+				{/if}
 
-			<div class="page-header">
-				<h2 id="transfer-heading" class="page-title">Transfer between accounts</h2>
-				<p id="transfer-desc" class="page-subtitle">
-					Move money instantly between your accounts.
-				</p>
-			</div>
-			<div class="form-card">
-				<TransferForm
-					{accounts}
-					bind:fromAccountId={fromId}
-					bind:toAccountId={toId}
-					bind:amount={amountStr}
-					submitDisabled={!canSubmit}
-					errorMessage={formError}
-					on:submit={handleSubmit}
+				<div class="page-header">
+					<h2 id="transfer-heading" class="page-title">Transfer between accounts</h2>
+					<p id="transfer-desc" class="page-subtitle">
+						Move money instantly between your accounts.
+					</p>
+				</div>
+				<div class="form-card">
+					<TransferForm
+						{accounts}
+						bind:fromAccountId={fromId}
+						bind:toAccountId={toId}
+						bind:amount={amountStr}
+						submitDisabled={!canSubmit}
+						errorMessage={formError}
+						on:submit={handleSubmit}
+					/>
+				</div>
+			</svelte:fragment>
+			<svelte:fragment slot="right">
+				<TransferSummary
+					fromLabel={fromAccount ? accountNameOnly(fromAccount) : ''}
+					toLabel={toAccount ? accountNameOnly(toAccount) : ''}
+					amount={amountNum > 0 ? amountNum : null}
+					fromBalance={fromAccount != null && amountNum > 0
+						? fromAccount.balance - amountNum
+						: (fromAccount?.balance ?? null)}
+					toBalance={toAccount != null && amountNum > 0
+						? toAccount.balance + amountNum
+						: (toAccount?.balance ?? null)}
 				/>
-			</div>
-		</svelte:fragment>
-		<svelte:fragment slot="right">
-			<TransferSummary
-				fromLabel={fromAccount ? accountNameOnly(fromAccount) : ''}
-				toLabel={toAccount ? accountNameOnly(toAccount) : ''}
-				amount={amountNum > 0 ? amountNum : null}
-				fromBalance={fromAccount != null && amountNum > 0
-					? fromAccount.balance - amountNum
-					: (fromAccount?.balance ?? null)}
-				toBalance={toAccount != null && amountNum > 0
-					? toAccount.balance + amountNum
-					: (toAccount?.balance ?? null)}
-			/>
-			<RecentTransfers items={recentTransferItems} />
-		</svelte:fragment>
-	</PageShell>
+				<RecentTransfers items={recentTransferItems} />
+			</svelte:fragment>
+		</PageShell>
+	</div>
 {/if}
 
 <style>
@@ -414,8 +416,8 @@
 	}
 
 	/* On transfers page, reduce left column vertical gap to 24px instead of 48px */
-	:global(.left-col) {
-		gap: var(--s-6) !important;
+	:global(.transfers-page .left-col) {
+		gap: var(--s-6);
 	}
 
 	.page-title {
