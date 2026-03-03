@@ -1,6 +1,7 @@
 import type { AccountSummary, ActivityItem } from '$lib/types/accounts';
 import { env } from '$env/dynamic/private';
 
+// Use dynamic private env so CI/type-checks work even when keys are not set.
 const DEFAULT_BASE_URL = 'https://northwind.dev.array.io';
 
 const API_KEY = env.NORTHWIND_API_KEY;
