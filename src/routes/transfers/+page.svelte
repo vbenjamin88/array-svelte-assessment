@@ -415,7 +415,7 @@
 
 	/* On transfers page, reduce left column vertical gap to 24px instead of 48px */
 	:global(.left-col) {
-		gap: var(--s-6);
+		gap: var(--s-6) !important;
 	}
 
 	.page-title {
