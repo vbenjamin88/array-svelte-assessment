@@ -3,3 +3,10 @@
 
 /* Tokens */
 @import './lib/styles/tokens.css';
+
+/* Shared layout */
+@import './lib/styles/layout.css';
+
+body {
+	font-family: var(--text-font), system-ui, sans-serif;
+}
