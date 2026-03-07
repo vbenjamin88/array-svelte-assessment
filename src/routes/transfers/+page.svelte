@@ -10,9 +10,24 @@
 	import { accountLabel, accountNameOnly } from '$lib/utils/accounts';
 
 	const recentTransfers = [
-		{ description: 'To High-Yield Savings', amount: -250.0, date: 'Dec 10', account: 'From Everyday Checking' },
-		{ description: 'To Everyday Checking', amount: 150.0, date: 'Dec 3', account: 'From High-Yield Savings' },
-		{ description: 'To Rewards Credit', amount: 430.12, date: 'Nov 28', account: 'Payment from Checking' }
+		{
+			description: 'To High-Yield Savings',
+			amount: -250.0,
+			date: 'Dec 10',
+			account: 'From Everyday Checking'
+		},
+		{
+			description: 'To Everyday Checking',
+			amount: 150.0,
+			date: 'Dec 3',
+			account: 'From High-Yield Savings'
+		},
+		{
+			description: 'To Rewards Credit',
+			amount: 430.12,
+			date: 'Nov 28',
+			account: 'Payment from Checking'
+		}
 	];
 
 	let fromId = '';
@@ -20,7 +35,13 @@
 	let amountStr = '';
 	let formError = '';
 	let transferState: 'idle' | 'success' | 'error' = 'idle';
-	let successDetails: { amount: number; from: string; to: string; date: string; confirmation: string } | null = null;
+	let successDetails: {
+		amount: number;
+		from: string;
+		to: string;
+		date: string;
+		confirmation: string;
+	} | null = null;
 	let errorDetails: string | null = null;
 
 	$: fromAccount = $accounts.find((a) => a.account_id === fromId);
@@ -92,7 +113,15 @@
 	}
 </script>
 
-<svelte:window on:keydown={(e) => e.key === 'Escape' && (transferState === 'success' ? closeSuccess() : transferState === 'error' ? closeError() : false)} />
+<svelte:window
+	on:keydown={(e) =>
+		e.key === 'Escape' &&
+		(transferState === 'success'
+			? closeSuccess()
+			: transferState === 'error'
+				? closeError()
+				: false)}
+/>
 
 {#if transferState === 'success' && successDetails}
 	<div class="result-page" role="status" aria-labelledby="success-title">
@@ -106,7 +135,9 @@
 				<div class="result-details">
 					<div class="result-detail-row">
 						<span class="detail-label">Amount</span>
-						<span class="detail-value">{successDetails.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+						<span class="detail-value"
+							>{successDetails.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span
+						>
 					</div>
 					<div class="result-detail-row">
 						<span class="detail-label">Transfer from</span>
@@ -141,7 +172,9 @@
 					<p class="result-message">{errorDetails}</p>
 				</div>
 				<div class="result-actions">
-					<button type="button" class="result-button" on:click={closeError}>Back to transfers</button>
+					<button type="button" class="result-button" on:click={closeError}
+						>Back to transfers</button
+					>
 				</div>
 			</div>
 		</div>
@@ -168,8 +201,12 @@
 				fromLabel={fromAccount ? accountNameOnly(fromAccount) : ''}
 				toLabel={toAccount ? accountNameOnly(toAccount) : ''}
 				amount={amountNum > 0 ? amountNum : null}
-				fromBalance={fromAccount != null && amountNum > 0 ? fromAccount.balance - amountNum : fromAccount?.balance ?? null}
-				toBalance={toAccount != null && amountNum > 0 ? toAccount.balance + amountNum : toAccount?.balance ?? null}
+				fromBalance={fromAccount != null && amountNum > 0
+					? fromAccount.balance - amountNum
+					: (fromAccount?.balance ?? null)}
+				toBalance={toAccount != null && amountNum > 0
+					? toAccount.balance + amountNum
+					: (toAccount?.balance ?? null)}
 			/>
 			<RecentTransfers items={recentTransfers} />
 		</svelte:fragment>
@@ -293,7 +330,6 @@
 		color: var(--result-fg-ci);
 		margin: 0;
 	}
-
 
 	.result-button {
 		font-family: var(--text-font);

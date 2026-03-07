@@ -27,12 +27,17 @@
 	}
 </script>
 
-<form class="form" aria-labelledby="transfer-heading" aria-describedby="transfer-desc" on:submit|preventDefault={() => dispatch('submit')}>
+<form
+	class="form"
+	aria-labelledby="transfer-heading"
+	aria-describedby="transfer-desc"
+	on:submit|preventDefault={() => dispatch('submit')}
+>
 	<div class="field">
 		<label for="transfer-from">Transfer from</label>
 		<AccountSelect
 			id="transfer-from"
-			accounts={accounts}
+			{accounts}
 			value={fromAccountId}
 			excludeId={toAccountId}
 			ariaLabel="Choose account to transfer from"
@@ -44,7 +49,7 @@
 		<label for="transfer-to">Transfer to</label>
 		<AccountSelect
 			id="transfer-to"
-			accounts={accounts}
+			{accounts}
 			value={toAccountId}
 			excludeId={fromAccountId}
 			ariaLabel="Choose account to transfer to"
@@ -69,9 +74,7 @@
 		</div>
 	</div>
 
-	<p class="disclaimer">
-		By continuing, I authorize Northwind Bank to transfer money as indicated
-	</p>
+	<p class="disclaimer">By continuing, I authorize Northwind Bank to transfer money as indicated</p>
 
 	{#if errorMessage}
 		<p class="error" role="alert">{errorMessage}</p>

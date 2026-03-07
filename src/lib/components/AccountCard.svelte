@@ -6,7 +6,11 @@
 	export let typeLabel: string;
 </script>
 
-<article class="card" class:inactive={!isActive} aria-label="{name} account ending in {accountNumberSuffix}">
+<article
+	class="card"
+	class:inactive={!isActive}
+	aria-label="{name} account ending in {accountNumberSuffix}"
+>
 	<div class="card-body">
 		<div class="card-row">
 			<h3 class="account-name">{name}</h3>

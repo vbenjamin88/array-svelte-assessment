@@ -11,7 +11,12 @@
 		{ description: 'Salary Deposit', amount: 2800.0, date: 'Dec 13', account: 'Everyday Checking' },
 		{ description: 'Coffee Shop', amount: -5.75, date: 'Dec 12', account: 'Rewards Credit' },
 		{ description: 'Interest Payment', amount: 5.24, date: 'Dec 1', account: 'High-Yield Savings' },
-		{ description: 'Transfer to Savings', amount: -250.0, date: 'Dec 10', account: 'Internal transfer' }
+		{
+			description: 'Transfer to Savings',
+			amount: -250.0,
+			date: 'Dec 10',
+			account: 'Internal transfer'
+		}
 	];
 
 	$: totalBalance = $accounts.reduce((sum, a) => sum + a.balance, 0);
@@ -27,7 +32,10 @@
 		<section class="total-section" aria-labelledby="total-heading">
 			<h2 id="total-heading" class="total-label">Total balance</h2>
 			<p class="total-amount" aria-live="polite">
-				${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+				${totalBalance.toLocaleString('en-US', {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				})}
 			</p>
 			<p class="total-subtitle">Across {accountCount} accounts</p>
 		</section>

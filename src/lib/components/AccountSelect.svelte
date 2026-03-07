@@ -34,7 +34,16 @@
 	let selectNode: HTMLDivElement;
 </script>
 
-<div class="account-select" bind:this={selectNode} use:clickOutside={() => open && (open = false)} role="combobox" aria-expanded={open} aria-haspopup="listbox" aria-controls={id + '-listbox'} aria-label={ariaLabel}>
+<div
+	class="account-select"
+	bind:this={selectNode}
+	use:clickOutside={() => open && (open = false)}
+	role="combobox"
+	aria-expanded={open}
+	aria-haspopup="listbox"
+	aria-controls={id + '-listbox'}
+	aria-label={ariaLabel}
+>
 	<button
 		type="button"
 		class="select-trigger"

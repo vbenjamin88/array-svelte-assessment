@@ -13,13 +13,17 @@
 	<div class="from-to-section">
 		<div class="col from-col">
 			<p class="from-to-title">
-				{amount != null && amount > 0 ? `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ` : ''}From
+				{amount != null && amount > 0
+					? `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} `
+					: ''}From
 			</p>
 			<div class="transaction-detail">
 				{#if fromLabel}
 					<span class="detail-line1">{fromLabel}</span>
 					<span class="detail-line2">
-						{fromBalance != null ? `New balance · $${fromBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : ''}
+						{fromBalance != null
+							? `New balance · $${fromBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+							: ''}
 					</span>
 				{:else}
 					<span class="detail-line1">-</span>
@@ -28,13 +32,17 @@
 		</div>
 		<div class="col to-col">
 			<p class="from-to-title">
-				{amount != null && amount > 0 ? `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ` : ''}To
+				{amount != null && amount > 0
+					? `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} `
+					: ''}To
 			</p>
 			<div class="transaction-detail">
 				{#if toLabel}
 					<span class="detail-line1">{toLabel}</span>
 					<span class="detail-line2">
-						{toBalance != null ? `New balance · $${toBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : ''}
+						{toBalance != null
+							? `New balance · $${toBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+							: ''}
 					</span>
 				{:else}
 					<span class="detail-line1">-</span>

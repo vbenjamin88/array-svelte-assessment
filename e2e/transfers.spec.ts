@@ -18,6 +18,8 @@ test.describe('Transfers page', () => {
 		await page.getByRole('option').nth(1).click();
 		await page.getByLabel(/transfer amount/i).fill('100');
 		await page.getByRole('button', { name: /complete transfer/i }).click();
-		await expect(page.getByRole('heading', { name: /transfer successful/i })).toBeVisible({ timeout: 5000 });
+		await expect(page.getByRole('heading', { name: /transfer successful/i })).toBeVisible({
+			timeout: 5000
+		});
 	});
 });
