@@ -1,13 +1,14 @@
-<script lang="ts">
-	import iconTransferSavings from '$lib/assets/bank.svg';
-
+<script context="module" lang="ts">
 	export interface TransferItem {
 		description: string;
 		amount: number;
 		date: string;
-		/** Source/account for second line (e.g. "From Everyday Checking") */
 		account?: string;
 	}
+</script>
+
+<script lang="ts">
+	import iconTransferSavings from '$lib/assets/bank.svg';
 
 	export let items: TransferItem[] = [];
 </script>
