@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { resolve } from '$app/paths';
 	import desktopLogo from '$lib/assets/logo.svg';
 	import mobileLogo from '$lib/assets/mobile-logo.svg';
 </script>
 
 <header class="header">
-	<a href="/" class="logo" aria-label="Home">
+	<a href={resolve('/')} class="logo" aria-label="Home">
 		<picture>
 			<source srcset={mobileLogo} media="(max-width: 767px)" />
 			<img src={desktopLogo} alt="Array brand logo" class="logo-image" />
@@ -13,7 +14,7 @@
 	</a>
 	<nav class="nav" aria-label="Main navigation">
 		<a
-			href="/"
+			href={resolve('/')}
 			class="nav-link"
 			class:active={$page.url.pathname === '/'}
 			aria-current={$page.url.pathname === '/' ? 'page' : undefined}
@@ -21,7 +22,7 @@
 			Accounts
 		</a>
 		<a
-			href="/transfers"
+			href={resolve('/transfers')}
 			class="nav-link"
 			class:active={$page.url.pathname === '/transfers'}
 			aria-current={$page.url.pathname === '/transfers' ? 'page' : undefined}

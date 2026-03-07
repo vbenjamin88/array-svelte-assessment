@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { accounts } from '$lib/stores/accounts';
-	import AppHeader from '$lib/components/AppHeader.svelte';
 	import TransferForm from '$lib/components/TransferForm.svelte';
 	import TransferSummary from '$lib/components/TransferSummary.svelte';
 	import RecentTransfers from '$lib/components/RecentTransfers.svelte';
