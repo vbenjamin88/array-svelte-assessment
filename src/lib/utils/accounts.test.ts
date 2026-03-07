@@ -1,0 +1,55 @@
+import { describe, it, expect } from 'vitest';
+import { accountLabel, accountNameOnly, maskAccountNumber } from './accounts';
+import type { AccountSummary } from '$lib/types/accounts';
+
+function mockAccount(overrides: Partial<AccountSummary> = {}): AccountSummary {
+	return {
+		account_id: '1',
+		account_holder_name: 'Account Holder',
+		account_number: '1234568821',
+		account_type: 'Checking',
+		account_status: 'Active',
+		balance: 2450.32,
+		currency: 'USD',
+		...overrides
+	};
+}
+
+describe('accountLabel', () => {
+	it('returns label with suffix for Checking', () => {
+		const account = mockAccount({ account_type: 'Checking', account_number: '1234568821' });
+		expect(accountLabel(account)).toBe('Everyday Checking...8821');
+	});
+
+	it('returns label with suffix for Savings', () => {
+		const account = mockAccount({ account_type: 'Savings', account_number: '1234561284' });
+		expect(accountLabel(account)).toBe('High-Yield Savings...1284');
+	});
+
+	it('returns label with suffix for Credit', () => {
+		const account = mockAccount({ account_type: 'Credit', account_number: '1234565678' });
+		expect(accountLabel(account)).toBe('Rewards Credit...5678');
+	});
+});
+
+describe('accountNameOnly', () => {
+	it('returns display name for each account type', () => {
+		expect(accountNameOnly(mockAccount({ account_type: 'Checking' }))).toBe('Everyday Checking');
+		expect(accountNameOnly(mockAccount({ account_type: 'Savings' }))).toBe('High-Yield Savings');
+		expect(accountNameOnly(mockAccount({ account_type: 'Credit' }))).toBe('Rewards Credit');
+	});
+
+	it('returns type as-is for unknown types', () => {
+		expect(accountNameOnly(mockAccount({ account_type: 'Other' }))).toBe('Other');
+	});
+});
+
+describe('maskAccountNumber', () => {
+	it('returns last 4 digits', () => {
+		expect(maskAccountNumber('1234568821')).toBe('8821');
+	});
+
+	it('handles short numbers', () => {
+		expect(maskAccountNumber('1234')).toBe('1234');
+	});
+});

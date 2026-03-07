@@ -2,7 +2,10 @@
 
 .page {
 	width: 100%;
+	min-height: 100vh;
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
 }
 
@@ -14,7 +17,7 @@
 	padding: var(--s-6);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1120px) {
 	.shell {
 		margin: 0;
 		border: none;
@@ -22,7 +25,7 @@
 	}
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1121px) {
 	.shell {
 		border: var(--border-size-thin) solid var(--border-ci);
 		box-shadow: var(--shadow);
