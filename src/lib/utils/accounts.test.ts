@@ -18,17 +18,17 @@ function mockAccount(overrides: Partial<AccountSummary> = {}): AccountSummary {
 describe('accountLabel', () => {
 	it('returns label with suffix for Checking', () => {
 		const account = mockAccount({ account_type: 'Checking', account_number: '1234568821' });
-		expect(accountLabel(account)).toBe('Everyday Checking...8821');
+		expect(accountLabel(account)).toBe('Everyday Checking...1234568821');
 	});
 
 	it('returns label with suffix for Savings', () => {
 		const account = mockAccount({ account_type: 'Savings', account_number: '1234561284' });
-		expect(accountLabel(account)).toBe('High-Yield Savings...1284');
+		expect(accountLabel(account)).toBe('High-Yield Savings...1234561284');
 	});
 
 	it('returns label with suffix for Credit', () => {
 		const account = mockAccount({ account_type: 'Credit', account_number: '1234565678' });
-		expect(accountLabel(account)).toBe('Rewards Credit...5678');
+		expect(accountLabel(account)).toBe('Rewards Credit...1234565678');
 	});
 });
 
@@ -45,11 +45,19 @@ describe('accountNameOnly', () => {
 });
 
 describe('maskAccountNumber', () => {
-	it('returns last 4 digits', () => {
-		expect(maskAccountNumber('1234568821')).toBe('8821');
+	it('returns all digits when there is no dash', () => {
+		expect(maskAccountNumber('1234568821')).toBe('1234568821');
 	});
 
 	it('handles short numbers', () => {
 		expect(maskAccountNumber('1234')).toBe('1234');
+	});
+
+	it('returns digits after the last dash', () => {
+		expect(maskAccountNumber('123456-00021')).toBe('00021');
+	});
+
+	it('strips non-digits after the dash', () => {
+		expect(maskAccountNumber('****-00021')).toBe('00021');
 	});
 });
