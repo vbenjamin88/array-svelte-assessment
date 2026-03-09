@@ -1,10 +1,10 @@
 import type { AccountSummary, ActivityItem } from '$lib/types/accounts';
-import { NORTHWIND_API_KEY, NORTHWIND_BASE_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 const DEFAULT_BASE_URL = 'https://northwind.dev.array.io';
 
-const API_KEY = NORTHWIND_API_KEY;
-const BASE_URL = NORTHWIND_BASE_URL || DEFAULT_BASE_URL;
+const API_KEY = env.NORTHWIND_API_KEY;
+const BASE_URL = env.NORTHWIND_BASE_URL || DEFAULT_BASE_URL;
 
 type FetchLike = typeof fetch;
 
