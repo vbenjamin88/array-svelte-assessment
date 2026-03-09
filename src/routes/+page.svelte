@@ -1,26 +1,20 @@
 <script lang="ts">
-	import { accounts } from '$lib/stores/accounts';
 	import AccountCard from '$lib/components/AccountCard.svelte';
 	import RecentActivity from '$lib/components/RecentActivity.svelte';
 	import PageShell from '$lib/components/PageShell.svelte';
 	import type { ActivityItem } from '$lib/types/accounts';
 	import { maskAccountNumber, accountNameOnly } from '$lib/utils/accounts';
 
-	const recentActivity: ActivityItem[] = [
-		{ description: 'Grocery Store', amount: -82.45, date: 'Dec 14', account: 'Everyday Checking' },
-		{ description: 'Salary Deposit', amount: 2800.0, date: 'Dec 13', account: 'Everyday Checking' },
-		{ description: 'Coffee Shop', amount: -5.75, date: 'Dec 12', account: 'Rewards Credit' },
-		{ description: 'Interest Payment', amount: 5.24, date: 'Dec 1', account: 'High-Yield Savings' },
-		{
-			description: 'Transfer to Savings',
-			amount: -250.0,
-			date: 'Dec 10',
-			account: 'Internal transfer'
-		}
-	];
+	export let data: {
+		accounts: import('$lib/types/accounts').AccountSummary[];
+		recentActivity: ActivityItem[];
+		apiAvailable?: boolean;
+	};
 
-	$: totalBalance = $accounts.reduce((sum, a) => sum + a.balance, 0);
-	$: accountCount = $accounts.length;
+	const { accounts, recentActivity, apiAvailable } = data;
+
+	const totalBalance = accounts.reduce((sum, account) => sum + account.balance, 0);
+	const accountCount = accounts.length;
 
 	function isActive(status: string): boolean {
 		return status?.toLowerCase() === 'active';
@@ -29,6 +23,10 @@
 
 <PageShell ariaLabel="Accounts overview" rightAriaLabel="Recent activity">
 	<svelte:fragment slot="left">
+		{#if apiAvailable === false}
+			<p class="api-warning" role="status">API is unavailable. Showing static demo data.</p>
+		{/if}
+
 		<section class="total-section" aria-labelledby="total-heading">
 			<h2 id="total-heading" class="total-label">Total balance</h2>
 			<p class="total-amount" aria-live="polite">
@@ -43,7 +41,7 @@
 		<section class="accounts-section" aria-labelledby="accounts-heading">
 			<h2 id="accounts-heading" class="section-heading">Your accounts</h2>
 			<ul class="account-list" role="list">
-				{#each $accounts as account (account.account_id)}
+				{#each accounts as account (account.account_id)}
 					<li>
 						<AccountCard
 							name={accountNameOnly(account)}
@@ -119,5 +117,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--s-2);
+	}
+
+	.api-warning {
+		font-family: var(--text-font);
+		font-size: var(--text-xs-fs);
+		color: var(--c-red-dark);
+		background-color: var(--c-red-lighter);
+		border-radius: var(--radius);
+		padding: var(--s-2);
+		margin: 0 0 var(--s-3);
 	}
 </style>

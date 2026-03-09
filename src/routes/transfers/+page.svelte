@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { accounts } from '$lib/stores/accounts';
 	import TransferForm from '$lib/components/TransferForm.svelte';
 	import TransferSummary from '$lib/components/TransferSummary.svelte';
 	import RecentTransfers from '$lib/components/RecentTransfers.svelte';
@@ -7,27 +6,20 @@
 	import transferSuccessIcon from '$lib/assets/transfer_success.svg';
 	import transferFailIcon from '$lib/assets/transfer_fail.svg';
 	import { accountLabel, accountNameOnly } from '$lib/utils/accounts';
+	import type { ActivityItem } from '$lib/types/accounts';
 
-	const recentTransfers = [
-		{
-			description: 'To High-Yield Savings',
-			amount: -250.0,
-			date: 'Dec 10',
-			account: 'From Everyday Checking'
-		},
-		{
-			description: 'To Everyday Checking',
-			amount: 150.0,
-			date: 'Dec 3',
-			account: 'From High-Yield Savings'
-		},
-		{
-			description: 'To Rewards Credit',
-			amount: 430.12,
-			date: 'Nov 28',
-			account: 'Payment from Checking'
-		}
-	];
+	export let data: {
+		accounts: import('$lib/types/accounts').AccountSummary[];
+		recentTransfers: import('$lib/types/accounts').ActivityItem[];
+		apiAvailable?: boolean;
+	};
+
+	const { recentTransfers, apiAvailable } = data;
+
+	// Work on a local, mutable copy so we can update balances after a transfer
+	let accounts = data.accounts.map((account) => ({ ...account }));
+
+	let recentTransferItems: ActivityItem[] = [...recentTransfers];
 
 	let fromId = '';
 	let toId = '';
@@ -43,12 +35,12 @@
 	} | null = null;
 	let errorDetails: string | null = null;
 
-	$: fromAccount = $accounts.find((a) => a.account_id === fromId);
-	$: toAccount = $accounts.find((a) => a.account_id === toId);
+	$: fromAccount = accounts.find((a) => a.account_id === fromId);
+	$: toAccount = accounts.find((a) => a.account_id === toId);
 	$: amountNum = parseFloat(amountStr) || 0;
 	$: canSubmit = !!fromId && !!toId && !!amountStr && amountNum > 0;
 
-	function handleSubmit(e: Event): void {
+	async function handleSubmit(e: Event): Promise<void> {
 		e.preventDefault();
 		formError = '';
 		transferState = 'idle';
@@ -80,21 +72,65 @@
 			return;
 		}
 
-		// Simulate success/failure (API integration will set transferState and details)
-		// For demo: simulate failure when amount > 2000
-		if (amountNum > 2000) {
-			transferState = 'error';
-			errorDetails =
-				'Your transfer could not be completed because the transaction limit for your account has been exceeded.';
-		} else {
+		try {
+			const response = await fetch('/api/transfer', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					fromId,
+					toId,
+					amount: amountNum
+				})
+			});
+
+			const data = await response.json();
+
+			if (!response.ok || !data.ok) {
+				transferState = 'error';
+				errorDetails =
+					data?.error ?? 'Your transfer could not be completed due to an unexpected error.';
+				return;
+			}
+
+			const transfer = data.transfer as {
+				amount: number;
+				currency: string;
+				status: string;
+				reference_number?: string;
+			};
+
+			const transferDate = new Date().toLocaleDateString('en-US', {
+				month: 'long',
+				day: 'numeric'
+			});
+
 			transferState = 'success';
 			successDetails = {
-				amount: amountNum,
+				amount: transfer.amount,
 				from: accountLabel(fromAccount!),
 				to: accountLabel(toAccount!),
-				date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' }),
-				confirmation: 'AHGDFJKA6U88'
+				date: transferDate,
+				confirmation: transfer.reference_number ?? 'N/A'
 			};
+
+			// Optimistically add to recent transfers list using API response
+			recentTransferItems = [
+				{
+					description: `To ${accountNameOnly(toAccount!)}`,
+					amount: -transfer.amount,
+					date: transferDate,
+					account: `From ${accountNameOnly(fromAccount!)}`
+				},
+				...recentTransferItems
+			];
+		} catch (error) {
+			transferState = 'error';
+			errorDetails =
+				error instanceof Error
+					? error.message
+					: 'Your transfer could not be completed due to an unexpected error.';
 		}
 	}
 
@@ -181,11 +217,15 @@
 {:else}
 	<PageShell ariaLabel="Balance transfer" rightAriaLabel="Transfer summary and recent transfers">
 		<svelte:fragment slot="left">
+			{#if apiAvailable === false}
+				<p class="api-warning" role="status">API is unavailable. Showing static demo data.</p>
+			{/if}
+
 			<h2 id="transfer-heading" class="page-title">Transfer between accounts</h2>
 			<p id="transfer-desc" class="page-subtitle">Move money instantly between your accounts.</p>
 			<div class="form-card">
 				<TransferForm
-					accounts={$accounts}
+					{accounts}
 					bind:fromAccountId={fromId}
 					bind:toAccountId={toId}
 					bind:amount={amountStr}
@@ -207,7 +247,7 @@
 					? toAccount.balance + amountNum
 					: (toAccount?.balance ?? null)}
 			/>
-			<RecentTransfers items={recentTransfers} />
+			<RecentTransfers items={recentTransferItems} />
 		</svelte:fragment>
 	</PageShell>
 {/if}
@@ -350,5 +390,15 @@
 	.result-button:focus-visible {
 		outline: 2px solid var(--primary-ci);
 		outline-offset: 2px;
+	}
+
+	.api-warning {
+		font-family: var(--text-font);
+		font-size: var(--text-xs-fs);
+		color: var(--c-red-dark);
+		background-color: var(--c-red-lighter);
+		border-radius: var(--radius);
+		padding: var(--s-2);
+		margin: 0 0 var(--s-3);
 	}
 </style>

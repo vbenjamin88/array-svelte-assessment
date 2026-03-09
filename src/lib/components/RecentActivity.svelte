@@ -1,34 +1,18 @@
 <script lang="ts">
 	import type { ActivityItem } from '$lib/types/accounts';
-	import iconGroceryStore from '$lib/assets/shopping-cart.svg';
-	import iconSalaryDeposit from '$lib/assets/briefcase.svg';
-	import iconCoffeeShop from '$lib/assets/hot-beverage.svg';
-	import iconTransferSavings from '$lib/assets/bank.svg';
-	import iconInterestPayment from '$lib/assets/money-bag.svg';
+	import bankIcon from '$lib/assets/bank.svg';
 
 	export let items: ActivityItem[] = [];
-
-	const iconMap: Record<string, string> = {
-		'Grocery Store': iconGroceryStore,
-		'Salary Deposit': iconSalaryDeposit,
-		'Coffee Shop': iconCoffeeShop,
-		'Transfer to Savings': iconTransferSavings,
-		'Interest Payment': iconInterestPayment
-	};
-
-	function getIcon(description: string): string {
-		return iconMap[description] ?? iconGroceryStore;
-	}
 </script>
 
 <section class="recent-activity" aria-labelledby="activity-heading">
 	<h2 id="activity-heading" class="heading">Recent Activity</h2>
 	<p class="subheading">Latest movements across all accounts</p>
 	<ul class="list" role="list">
-		{#each items as item (item.description + item.date)}
+		{#each items as item, index (item.description + item.date + index)}
 			<li class="item">
 				<div class="item-icon" aria-hidden="true">
-					<img src={getIcon(item.description)} alt="" class="icon-img" />
+					<img src={bankIcon} alt="" class="icon-img" />
 				</div>
 				<div class="item-detail">
 					<span class="detail-line1">{item.description}</span>

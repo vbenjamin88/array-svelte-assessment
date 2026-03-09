@@ -6,7 +6,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 }
 
 .shell {
@@ -26,6 +25,12 @@
 }
 
 @media (min-width: 1121px) {
+	.page {
+		justify-content: flex-start;
+		padding-top: 128px;
+		padding-bottom: 128px;
+	}
+
 	.shell {
 		border: var(--border-size-thin) solid var(--border-ci);
 		box-shadow: var(--shadow);

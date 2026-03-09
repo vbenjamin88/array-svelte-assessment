@@ -17,7 +17,7 @@
 	<h2 id="transfers-heading" class="heading">Recent transfers</h2>
 	<p class="subheading">Quick reference of your latest internal transfers.</p>
 	<ul class="list" role="list">
-		{#each items as item (item.description + item.date)}
+		{#each items as item, index (item.description + item.date + index)}
 			<li class="item">
 				<div class="item-icon" aria-hidden="true">
 					<img src={iconTransferSavings} alt="" class="icon-img" />
